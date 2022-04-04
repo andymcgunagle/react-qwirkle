@@ -2,9 +2,9 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { RootState } from "../redux/store";
-import Bag from "./Bag";
-import Grid from "./Grid";
-import PlayersTiles from "./PlayersTiles";
+import Bag from "./TileSections/Bag";
+import Grid from "./TileSections/Grid";
+import PlayersTiles from "./TileSections/PlayersTiles";
 
 const Wrapper = styled.div`
   display: flex;
