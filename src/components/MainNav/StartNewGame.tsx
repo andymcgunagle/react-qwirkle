@@ -4,7 +4,7 @@ import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 import { firestoreDB } from "../../firebase";
-import { setDoc, doc, updateDoc } from "firebase/firestore";
+import { setDoc, doc } from "firebase/firestore";
 
 import { createBag } from "../../utils/createBag";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
@@ -17,9 +17,9 @@ export default function StartNewGame() {
   const dialogRef = useRef<HTMLDivElement>(null);
   useOnClickOutside(dialogRef, () => setShowConfirmDialog(false));
 
-  async function handleClick() {
+  async function handleStartNewGame() {
     if (uid) {
-      await updateDoc(doc(firestoreDB, "users", uid, "games", uid), { tiles: createBag() });
+      await setDoc(doc(firestoreDB, "users", uid, "games", uid), { tiles: createBag() });
 
       await setDoc(doc(firestoreDB, "users", uid, "games", "current"), { currentGameId: uid });
 
@@ -53,7 +53,7 @@ export default function StartNewGame() {
               Cancel
             </button>
             <button
-              onClick={handleClick}
+              onClick={handleStartNewGame}
               type="button"
             >
               Start new game
