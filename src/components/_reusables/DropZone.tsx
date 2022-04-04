@@ -12,9 +12,12 @@ const Wrapper = styled.div`
   justify-content: center;
 
   border: 1px solid var(--clr-gray-300);
-  height: var(--space-10);
-  width: var(--space-10);
-  
+
+  &.zoom-in {
+    height: var(--space-10);
+    width: var(--space-10);
+  }
+
   &.zoom-out {
     height: var(--space-6);
     width: var(--space-6);
@@ -24,12 +27,13 @@ const Wrapper = styled.div`
     border: 2px solid var(--clr-warning-500);
     background-color: var(--clr-warning-100);
   }
+  
   &.is-center::after {
     display: flex;
     align-items: center;
 
-    content: "🎯 Center";
-    font-size: var(--font-size-0);
+    content: "🎯";
+    font-size: var(--font-size-2);
     text-align: center;
     color: var(--clr-warning-600);
   }
@@ -43,6 +47,7 @@ export default function DropZone({
 }: DropZoneProps) {
   const uid = useSelector((state: RootState) => state.user.uid);
   const currentGameId = useSelector((state: RootState) => state.user.currentGameId);
+  const isZoomedIn = useSelector((state: RootState) => state.user.isZoomedIn);
 
   async function dropHandler(e: React.DragEvent) {
     e.preventDefault();
@@ -72,7 +77,7 @@ export default function DropZone({
 
   return (
     <Wrapper
-      className={`drop-zone ${dropZoneType} ${isCenter && "is-center"}`}
+      className={`drop-zone ${isZoomedIn ? "zoom-in" : "zoom-out"} ${dropZoneType} ${isCenter && "is-center"}`}
       id={id}
       onDragOver={(e: React.DragEvent<HTMLDivElement>) => e.preventDefault()}
       onDrop={dropHandler}

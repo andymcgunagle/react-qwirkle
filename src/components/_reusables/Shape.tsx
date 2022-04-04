@@ -1,7 +1,11 @@
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import { RootState } from "../../redux/store";
 
 const MaterialIcon = styled.span`
-  font-size: var(--font-size-14) !important;
+  &.zoom-in {
+    font-size: var(--font-size-14) !important;
+  }
 
   &.hide {
     display: none;
@@ -13,8 +17,10 @@ const MaterialIcon = styled.span`
 `;
 
 export default function Shape({ hide, shape }: ShapeProps) {
+  const isZoomedIn = useSelector((state: RootState) => state.user.isZoomedIn);
+
   return (
-    <MaterialIcon className={`material-icons-round shape ${hide && 'hide'}`}>
+    <MaterialIcon className={`material-icons-round shape ${isZoomedIn ? "zoom-in" : "zoom-out"} ${hide && 'hide'}`}>
       {shape}
     </MaterialIcon>
   );

@@ -5,6 +5,8 @@ export type UserState = {
   currentGameId: string | null,
   displayName: string | null,
   email: string | null,
+  isBagOpen: boolean,
+  isZoomedIn: boolean,
   tiles: TileObject[],
   uid: string | null,
 };
@@ -13,6 +15,8 @@ const initialState: UserState = {
   currentGameId: null,
   displayName: null,
   email: null,
+  isBagOpen: true,
+  isZoomedIn: true,
   tiles: [],
   uid: null,
 };
@@ -31,6 +35,12 @@ const userSlice = createSlice({
       state.tiles = payload.tiles;
       state.uid = payload.uid;
     },
+    toggleBag(state) {
+      state.isBagOpen = !state.isBagOpen;
+    },
+    toggleZoom(state) {
+      state.isZoomedIn = !state.isZoomedIn;
+    },
     updateTiles(state, { payload }) {
       state.tiles = payload;
     },
@@ -40,6 +50,8 @@ const userSlice = createSlice({
 export const {
   resetUser,
   setUser,
+  toggleBag,
+  toggleZoom,
   updateTiles,
 } = userSlice.actions;
 

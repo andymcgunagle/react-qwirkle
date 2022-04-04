@@ -7,6 +7,7 @@ export function handleShapeVisibility(dropZone: HTMLDivElement, tile: HTMLElemen
   // If dropped in a grid drop zone, do the following...
   if (dropZone.classList.contains("grid")) {
     tile.firstElementChild?.classList.remove("hide");
+    console.log(tile.firstElementChild);
   };
 
   // If dropped in a player drop zone, do the following...

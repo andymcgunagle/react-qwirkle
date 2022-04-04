@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   
   height: 100vh;
   max-height: -webkit-fill-available;
-  padding: var(--space-4) var(--space-2);
+  padding: var(--space-2);
 
   @media only screen and (min-width: 768px) {
     height: calc(100vh - var(--space-2) * 2);

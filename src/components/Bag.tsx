@@ -11,11 +11,14 @@ import Tile from "./_reusables/Tile";
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(54, 1fr);
   gap: var(--space-00);
 
-  width: fit-content;
   overflow: scroll;
+  
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export default function Bag() {

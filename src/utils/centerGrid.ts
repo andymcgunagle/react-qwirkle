@@ -3,15 +3,9 @@ export function centerGrid(behavior: ScrollBehavior = "smooth") {
 
   if (gridCell) {
     gridCell.scrollIntoView({
-      behavior,
+      behavior: "smooth",
       block: "center",
       inline: "center",
     });
-
-    // window.scroll({
-    //   top: 0,
-    //   left: 0,
-    //   behavior: "smooth",
-    // });
   }
 };

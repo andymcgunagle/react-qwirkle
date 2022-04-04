@@ -11,10 +11,15 @@ import Tile from "./_reusables/Tile";
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: var(--space-00);
+  align-self: center;
 
   width: fit-content;
+
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 
 export default function PlayersTiles() {
