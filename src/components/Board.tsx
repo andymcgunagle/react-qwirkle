@@ -8,13 +8,17 @@ const Wrapper = styled.div`
   gap: var(--space-2);
 
   animation: var(--animation-fade-in);
-  height: 92.5%;
+  height: 90%;
   width: 100%;
   
   & > .players-tiles-and-bag-wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--space-2);
+  }
+
+  @media only screen and (min-width: 768px) {
+    height: 92.5%;
   }
 `;
 

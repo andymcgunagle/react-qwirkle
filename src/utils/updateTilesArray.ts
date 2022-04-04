@@ -1,4 +1,4 @@
-import { TileObject } from "./createBag";
+import { TileObject } from "../data/tiles";
 
 export function updateTilesArray({
   dropZoneId,

@@ -1,51 +1,65 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
 import { firestoreDB } from "../../firebase";
-import { setDoc, doc } from "firebase/firestore";
+import { setDoc, doc, updateDoc } from "firebase/firestore";
 
 import { createBag } from "../../utils/createBag";
+import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 
-import Dialog from "../_reusables/Dialog";
-
-export default function StartGame() {
+export default function StartNewGame() {
   const uid = useSelector((state: RootState) => state.user.uid);
 
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  async function startGame() {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  useOnClickOutside(dialogRef, () => setShowConfirmDialog(false));
+
+  async function handleClick() {
     if (uid) {
-      await setDoc(doc(firestoreDB, "users", uid, "games", uid), { tiles: createBag() });
+      await updateDoc(doc(firestoreDB, "users", uid, "games", uid), { tiles: createBag() });
+
       await setDoc(doc(firestoreDB, "users", uid, "games", "current"), { currentGameId: uid });
+
       setShowConfirmDialog(false);
+
+      window.location.reload();
     }
   };
 
   return (
     <>
-      <button onClick={() => setShowConfirmDialog(true)} className="with-icon">
+      <button
+        className="outlined with-icon"
+        onClick={() => setShowConfirmDialog(true)}
+      >
         <span className="material-icons-round">play_circle_filled</span>
         <span>Start new game</span>
       </button>
       {showConfirmDialog &&
-        <Dialog handler={() => setShowConfirmDialog(false)}>
+        <div
+          className="modal card brand light column-center gap-4"
+          ref={dialogRef}
+        >
           <p>Are you sure you'd like to start a new game?</p>
           <div className="row-center gap-4">
             <button
               onClick={() => setShowConfirmDialog(false)}
               className="standard danger"
+              type="button"
             >
               Cancel
             </button>
             <button
-              onClick={startGame}
+              onClick={handleClick}
+              type="button"
             >
               Start new game
             </button>
           </div>
-        </Dialog>
+        </div>
       }
     </>
   );

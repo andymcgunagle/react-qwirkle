@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { shapes, colors } from "../../utils/createBag";
+import { colors, shapes } from "../../data/tiles";
 
 import Tile from "./Tile";
 

@@ -1,6 +1,6 @@
 import { useSignIn } from "../../hooks/useSignIn";
 
-import ErrorMessageDialog from "./ErrorMessageDialog";
+import ErrorMessageModal from "./ErrorMessageModal";
 import HorizontalRuleWithText from "../_reusables/HorizontalRuleWithText";
 import GoogleAuthButton from "./GoogleAuthButton";
 
@@ -32,7 +32,7 @@ export default function SignIn() {
       onSubmit={submitUserData}
       className="card"
     >
-      <ErrorMessageDialog
+      <ErrorMessageModal
         errorMessage={errorMessage}
         showErrorMessage={showErrorMessage}
       />

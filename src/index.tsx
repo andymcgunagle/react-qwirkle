@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 
-import './globals/_globals.css';
+import './styles/_globals.css';
 
 const root = createRoot(document.getElementById('root')!);
 

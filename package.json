@@ -22,11 +22,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "save": "git add . && git commit && git push origin main",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "save": "git add . && git commit && git push origin main",
+    "deploy": "npm run build && firebase deploy"
   },
   "eslintConfig": {
     "extends": [

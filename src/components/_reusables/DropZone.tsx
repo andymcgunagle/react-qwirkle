@@ -14,17 +14,32 @@ const Wrapper = styled.div`
   border: 1px solid var(--clr-gray-300);
   height: var(--space-10);
   width: var(--space-10);
-
+  
   &.zoom-out {
     height: var(--space-6);
     width: var(--space-6);
   }
+  
+  &.is-center {
+    border: 2px solid var(--clr-warning-500);
+    background-color: var(--clr-warning-100);
+  }
+  &.is-center::after {
+    display: flex;
+    align-items: center;
+
+    content: "🎯 Center";
+    font-size: var(--font-size-0);
+    text-align: center;
+    color: var(--clr-warning-600);
+  }
 `;
 
 export default function DropZone({
-  id,
   children,
-  dropZoneType
+  dropZoneType,
+  id,
+  isCenter,
 }: DropZoneProps) {
   const uid = useSelector((state: RootState) => state.user.uid);
   const currentGameId = useSelector((state: RootState) => state.user.currentGameId);
@@ -57,7 +72,7 @@ export default function DropZone({
 
   return (
     <Wrapper
-      className={`drop-zone ${dropZoneType}`}
+      className={`drop-zone ${dropZoneType} ${isCenter && "is-center"}`}
       id={id}
       onDragOver={(e: React.DragEvent<HTMLDivElement>) => e.preventDefault()}
       onDrop={dropHandler}
@@ -71,4 +86,5 @@ interface DropZoneProps {
   children?: JSX.Element,
   dropZoneType: "bag" | "grid" | "player",
   id: string,
+  isCenter?: boolean,
 };

@@ -3,6 +3,8 @@ import { RootState } from "./redux/store";
 
 import { Route, Routes } from "react-router-dom";
 
+import { useLoadingState } from "./hooks/useLoadingState";
+import { useScrollToTopOnLoad } from "./hooks/useScrollToTopOnLoad";
 import { useSetUser } from "./hooks/useSetUser";
 
 import styled from "styled-components";
@@ -12,16 +14,29 @@ import NotFound from "./components/_reusables/NotFound";
 import Board from "./components/Board";
 import MainNav from "./components/MainNav/MainNav";
 import Loading from "./components/_reusables/Loading";
-import { useLoadingState } from "./hooks/useLoadingState";
 
 const Wrapper = styled.div`
-  overflow: hidden;
-  height: calc(100vh - var(--space-2) * 2);
-  width: calc(100vw - var(--space-2) * 2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  
+  height: 100vh;
+  max-height: -webkit-fill-available;
+  padding: var(--space-4) var(--space-2);
+
+  @media only screen and (min-width: 768px) {
+    height: calc(100vh - var(--space-2) * 2);
+    max-height: -webkit-fill-available;
+    overflow: hidden;
+    width: calc(100vw - var(--space-2) * 2);
+    padding: 0;
+  }
 `;
 
 export default function App() {
   useSetUser();
+
+  useScrollToTopOnLoad();
 
   const { isLoading } = useLoadingState();
 

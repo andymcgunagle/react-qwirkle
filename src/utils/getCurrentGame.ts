@@ -1,5 +1,5 @@
 import { getDoc } from "firebase/firestore";
-import { TileObject } from "./createBag";
+import { TileObject } from "../data/tiles";
 import { currentGameRef } from "./currentGameRef";
 
 export async function getCurrentGame(currentGameId: string) {

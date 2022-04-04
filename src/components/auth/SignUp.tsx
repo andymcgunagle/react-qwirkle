@@ -4,7 +4,7 @@ import { useSignUp } from "../../hooks/useSignUp";
 
 import styled from "styled-components";
 
-import ErrorMessageDialog from "./ErrorMessageDialog";
+import ErrorMessageModal from "./ErrorMessageModal";
 import HorizontalRuleWithText from "../_reusables/HorizontalRuleWithText";
 import GoogleAuthButton from "./GoogleAuthButton";
 
@@ -36,7 +36,7 @@ export default function SignUp() {
       onSubmit={signUpNewUser}
       className="card"
     >
-      <ErrorMessageDialog
+      <ErrorMessageModal
         errorMessage={errorMessage}
         showErrorMessage={showErrorMessage}
       />

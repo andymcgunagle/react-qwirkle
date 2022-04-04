@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { TileObject } from "../utils/createBag";
+import { TileObject } from "../data/tiles";
 
 export type UserState = {
   currentGameId: string | null,

@@ -15,3 +15,7 @@
   flex-wrap: wrap;
   gap: var(--space-0);
 }
+
+.column-center input {
+  width: 100%;
+}

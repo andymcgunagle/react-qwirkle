@@ -5,10 +5,7 @@ export function useErrorMessage() {
   const [showErrorMessage, setShowErrorMessage] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowErrorMessage(false);
-    }, 3 * 1000);
-
+    const timer = setTimeout(() => setShowErrorMessage(false), 3000);
     return () => clearTimeout(timer);
   }, [showErrorMessage]);
 

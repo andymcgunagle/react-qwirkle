@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import CenterGrid from "./CenterGrid";
 import JoinGame from "./JoinGame";
 import SignOut from "../auth/SignOut";
-import StartGame from "./StartGame";
+import StartNewGame from "./StartNewGame";
 import Zoom from "./Zoom";
 import InvitePlayers from "./InvitePlayers";
 
@@ -14,8 +14,6 @@ const Nav = styled.nav`
   display: flex;
   flex-wrap: wrap-reverse;
   gap: var(--space-2);
-  
-  padding-bottom: var(--space-2);
 
   & > div {
     display: flex;
@@ -36,12 +34,12 @@ export default function MainNav() {
   return (
     <Nav className="row-center">
       <div>
-        <CenterGrid />
         <Zoom />
+        <CenterGrid />
       </div>
       <div>
         {currentGameId === uid && <InvitePlayers />}
-        <StartGame />
+        <StartNewGame />
         <JoinGame />
         <SignOut />
       </div>
