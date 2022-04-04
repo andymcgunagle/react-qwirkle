@@ -1,0 +1,11 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents { 
+  	// APP RULES
+    match /users/{userId} {
+    	match /games/{gameId} {
+      	allow create, read, update, delete: if request.auth != null;
+      }
+    }
+  }
+}
