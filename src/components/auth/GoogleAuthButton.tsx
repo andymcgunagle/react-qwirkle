@@ -5,12 +5,10 @@ import { firebaseAuth } from "../../firebase";
 
 import GoogleLogo from "../../images/google-logo.png";
 
-export default function UseGoogleAuthButton(
-  {
-    setErrorMessage,
-    setShowErrorMessage,
-  }: UseGoogleAuthButtonProps
-) {
+export default function GoogleAuthButton({
+  setErrorMessage,
+  setShowErrorMessage,
+}: GoogleAuthButtonProps) {
   const navigate = useNavigate();
 
   const useGoogleAuth = async () => {
@@ -48,7 +46,7 @@ export default function UseGoogleAuthButton(
   );
 };
 
-interface UseGoogleAuthButtonProps {
+interface GoogleAuthButtonProps {
   setErrorMessage: React.Dispatch<React.SetStateAction<string>>,
   setShowErrorMessage: React.Dispatch<React.SetStateAction<boolean>>,
 };

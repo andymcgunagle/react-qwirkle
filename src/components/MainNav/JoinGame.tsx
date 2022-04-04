@@ -6,15 +6,7 @@ import { RootState } from "../../redux/store";
 import { doc, updateDoc } from "firebase/firestore";
 import { firestoreDB } from "../../firebase";
 
-import styled from "styled-components";
-
-const Form = styled.form`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: calc(100% - var(--space-2) * 2);
-`;
+import Dialog from "../_reusables/Dialog";
 
 export default function JoinGame() {
   const uid = useSelector((state: RootState) => state.user.uid);
@@ -37,24 +29,33 @@ export default function JoinGame() {
 
   return (
     <>
-      <button onClick={() => setShowJoinGame(!showJoinGame)}>
-        Join game
+      <button
+        className="with-icon"
+        onClick={() => setShowJoinGame(!showJoinGame)}
+      >
+        <span className="material-icons-round">groups</span>
+        <span>Join game</span>
       </button>
       {showJoinGame &&
-        <Form className="card" onSubmit={handleSubmit}>
-          <h3>Join a game</h3>
+        <Dialog
+          onSubmit={handleSubmit}
+          handler={() => setShowJoinGame(false)}
+        >
+          <h3>
+            Join a game
+          </h3>
           <input
-            type="text"
-            placeholder="Game ID"
-            value={gameId}
             onChange={(e) => setGameId(e.target.value)}
+            placeholder="Game ID"
+            type="text"
+            value={gameId}
           />
           <button
             type="submit"
           >
             Submit
           </button>
-        </Form>}
+        </Dialog>}
     </>
   );
 };

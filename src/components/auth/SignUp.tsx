@@ -1,68 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { useTypedDispatch } from "../../redux/store";
-import { setUser } from "../../redux/userSlice";
+import { useSignUp } from "../../hooks/useSignUp";
 
-import { useNavigate } from "react-router-dom";
-
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { firebaseAuth } from "../../firebase";
-
-import { useErrorMessage } from "../../hooks/useErrorMessage";
-
-import { createUserObject } from "../../utils/createUserObject";
+import styled from "styled-components";
 
 import ErrorMessageDialog from "./ErrorMessageDialog";
 import HorizontalRuleWithText from "../_reusables/HorizontalRuleWithText";
-import UseGoogleAuthButton from "./UseGoogleAuthButton";
+import GoogleAuthButton from "./GoogleAuthButton";
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+`;
 
 export default function SignUp() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
 
   const {
+    confirmPassword,
+    email,
     errorMessage,
-    showErrorMessage,
+    handleConfirmPasswordChange,
+    handleEmailChange,
+    handlePasswordChange,
+    password,
     setErrorMessage,
     setShowErrorMessage,
-  } = useErrorMessage();
-
-  const dispatch = useTypedDispatch();
-  const navigate = useNavigate();
-
-  const signUpNewUser = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (email === '' || password === '') {
-      setErrorMessage('Please fill out all fields.');
-      setShowErrorMessage(true);
-      return;
-    };
-
-    if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match.');
-      setShowErrorMessage(true);
-      return;
-    };
-
-    try {
-      const { user } = await createUserWithEmailAndPassword(firebaseAuth, email, password);
-
-      dispatch(setUser(createUserObject(user, null)));
-
-      navigate({ pathname: '/' });
-    } catch (error: any) {
-      if (error.message) {
-        setErrorMessage(error.message);
-        setShowErrorMessage(true);
-        console.error(error.message);
-      };
-    };
-  };
+    showErrorMessage,
+    signUpNewUser,
+  } = useSignUp();
 
   return (
-    <form
+    <Form
       onSubmit={signUpNewUser}
       className="card"
     >
@@ -75,7 +45,7 @@ export default function SignUp() {
         Sign up with one click...
       </h2>
 
-      <UseGoogleAuthButton
+      <GoogleAuthButton
         setErrorMessage={setErrorMessage}
         setShowErrorMessage={setShowErrorMessage}
       />
@@ -85,27 +55,27 @@ export default function SignUp() {
       <input
         type="email"
         value={email}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+        onChange={handleEmailChange}
         placeholder="Email"
       />
       <input
         autoComplete="new-password"
         type="password"
         value={password}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
+        onChange={handlePasswordChange}
         placeholder="Password"
       />
       <input
         autoComplete="new-password"
         type="password"
         value={confirmPassword}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setConfirmPassword(e.target.value)}
+        onChange={handleConfirmPasswordChange}
         placeholder="Confirm Password"
       />
 
       <button type="submit">
         Sign Up
       </button>
-    </form>
+    </Form>
   );
 };

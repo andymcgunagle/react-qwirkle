@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { RootState } from "../../redux/store";
 import { useSelector } from "react-redux";
 
-import CenterGameGrid from "./CenterGameGrid";
+import CenterGrid from "./CenterGrid";
 import JoinGame from "./JoinGame";
 import SignOut from "../auth/SignOut";
 import StartGame from "./StartGame";
@@ -12,16 +12,20 @@ import InvitePlayers from "./InvitePlayers";
 
 const Nav = styled.nav`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: var(--space-2);
+  flex-wrap: wrap-reverse;
   gap: var(--space-2);
+  
+  padding-bottom: var(--space-2);
 
   & > div {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: var(--space-2);
+  }
+
+  @media only screen and (min-width: 768px) {
+    justify-content: space-between; 
   }
 `;
 
@@ -32,7 +36,7 @@ export default function MainNav() {
   return (
     <Nav className="row-center">
       <div>
-        <CenterGameGrid />
+        <CenterGrid />
         <Zoom />
       </div>
       <div>

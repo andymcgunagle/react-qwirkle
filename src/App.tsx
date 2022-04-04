@@ -9,10 +9,10 @@ import styled from "styled-components";
 
 import AuthPage from "./components/auth/AuthPage";
 import NotFound from "./components/_reusables/NotFound";
-import GameBoard from "./components/GameBoard";
+import Board from "./components/Board";
 import MainNav from "./components/MainNav/MainNav";
-import { useEffect, useState } from "react";
 import Loading from "./components/_reusables/Loading";
+import { useLoadingState } from "./hooks/useLoadingState";
 
 const Wrapper = styled.div`
   overflow: hidden;
@@ -21,19 +21,15 @@ const Wrapper = styled.div`
 `;
 
 export default function App() {
-  const [showLoadingSpinner, setShowLoadingSpinner] = useState(true);
   useSetUser();
+
+  const { isLoading } = useLoadingState();
 
   const uid = useSelector((state: RootState) => state.user.uid);
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowLoadingSpinner(false), 2000);
-    return () => clearTimeout(timer);
-  }, []);
-
   if (!uid) return (
-    <div className="App">
-      {showLoadingSpinner ? <Loading /> :
+    <div>
+      {isLoading ? <Loading /> :
         <Routes>
           <Route path="/" element={<AuthPage />} />
           <Route path="/sign-up" element={<AuthPage />} />
@@ -45,11 +41,11 @@ export default function App() {
 
   return (
     <Wrapper>
-      {showLoadingSpinner ? <Loading /> :
+      {isLoading ? <Loading /> :
         <>
           <MainNav />
           <Routes>
-            <Route path="/" element={<GameBoard />} />
+            <Route path="/" element={<Board />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </>}

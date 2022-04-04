@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Bag from "./Bag";
-import GameGrid from "./GameGrid/GameGrid";
+import Grid from "./Grid";
 import PlayersTiles from "./PlayersTiles";
 
 const Wrapper = styled.div`
@@ -18,14 +18,14 @@ const Wrapper = styled.div`
   }
 `;
 
-export default function GameBoard() {
+export default function Board() {
   return (
     <Wrapper>
       <div className="players-tiles-and-bag-wrapper">
         <PlayersTiles />
         <Bag />
       </div>
-      <GameGrid />
+      <Grid />
     </Wrapper>
   );
 };

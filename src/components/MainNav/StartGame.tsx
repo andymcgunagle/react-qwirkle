@@ -25,8 +25,9 @@ export default function StartGame() {
 
   return (
     <>
-      <button onClick={() => setShowConfirmDialog(true)}>
-        Start new game
+      <button onClick={() => setShowConfirmDialog(true)} className="with-icon">
+        <span className="material-icons-round">play_circle_filled</span>
+        <span>Start new game</span>
       </button>
       {showConfirmDialog &&
         <Dialog handler={() => setShowConfirmDialog(false)}>

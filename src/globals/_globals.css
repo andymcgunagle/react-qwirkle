@@ -12,6 +12,7 @@
 @import './inputs.css';
 @import './keyframes.css';
 @import './lists.css';
+@import './modals.css';
 @import './shapes.css';
 @import './titled-section.css';
 
@@ -31,11 +32,4 @@ body {
   background: var(--clr-gray-200);
   padding: var(--space-2);
   overscroll-behavior: none;
-}
-
-.component-background {
-  background-color: var(--clr-white);
-  border-radius: var(--border-radius-6);
-  box-shadow: var(--box-shadow-8);
-  padding: var(--space-4);
 }

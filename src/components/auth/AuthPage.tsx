@@ -4,6 +4,7 @@ import SignIn from './SignIn';
 import SignUp from './SignUp';
 
 import styled from 'styled-components';
+import AnimatedTile from '../_reusables/AnimatedTile';
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,10 +16,6 @@ const Wrapper = styled.div`
   max-width: 500px;
   min-height: 100vh;
   padding-bottom: var(--space-16);
-
-  & > h2 {
-    color: var(--clr-brand-700);
-  }
 `;
 
 export default function AuthPage() {
@@ -32,7 +29,8 @@ export default function AuthPage() {
 
   return (
     <Wrapper>
-      <h2 className="center font-14">
+      <AnimatedTile />
+      <h2 className="center font-14 clr-brand-700">
         React Qwirkle
       </h2>
 

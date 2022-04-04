@@ -1,63 +1,34 @@
-import { useState } from "react";
-
-import { useTypedDispatch } from "../../redux/store";
-import { setUser } from "../../redux/userSlice";
-
-import { useNavigate } from "react-router-dom";
-
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { firebaseAuth } from "../../firebase";
-
-import { useErrorMessage } from "../../hooks/useErrorMessage";
+import { useSignIn } from "../../hooks/useSignIn";
 
 import ErrorMessageDialog from "./ErrorMessageDialog";
 import HorizontalRuleWithText from "../_reusables/HorizontalRuleWithText";
-import UseGoogleAuthButton from "./UseGoogleAuthButton";
-import { createUserObject } from "../../utils/createUserObject";
+import GoogleAuthButton from "./GoogleAuthButton";
+
+import styled from 'styled-components';
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-2);
+`;
 
 export default function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const {
+    email,
     errorMessage,
-    showErrorMessage,
+    handleEmailChange,
+    handlePasswordChange,
+    password,
     setErrorMessage,
     setShowErrorMessage,
-  } = useErrorMessage();
-
-  const dispatch = useTypedDispatch();
-  const navigate = useNavigate();
-
-  const onEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => setEmail(event.target.value);
-  const onPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => setPassword(event.target.value);
-
-  const submitUserData = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (email === '' || password === '') {
-      setErrorMessage('Please fill out all fields.');
-      setShowErrorMessage(true);
-      return;
-    };
-
-    try {
-      const { user } = await signInWithEmailAndPassword(firebaseAuth, email, password);
-
-      dispatch(setUser(createUserObject(user, null)));
-
-      navigate({ pathname: '/' });
-    } catch (error: any) {
-      if (error.message) {
-        setErrorMessage(error.message);
-        setShowErrorMessage(true);
-        console.error(error.message);
-      };
-    };
-  };
+    showErrorMessage,
+    submitUserData,
+  } = useSignIn();
 
   return (
-    <form
+    <Form
       onSubmit={submitUserData}
       className="card"
     >
@@ -70,7 +41,7 @@ export default function SignIn() {
         Welcome back!
       </h3>
 
-      <UseGoogleAuthButton
+      <GoogleAuthButton
         setErrorMessage={setErrorMessage}
         setShowErrorMessage={setShowErrorMessage}
       />
@@ -80,19 +51,19 @@ export default function SignIn() {
       <input
         type="email"
         value={email}
-        onChange={onEmailChange}
+        onChange={handleEmailChange}
         placeholder="Email"
       />
       <input
         type="password"
         value={password}
-        onChange={onPasswordChange}
+        onChange={handlePasswordChange}
         placeholder="Password"
       />
 
       <button type="submit">
         Sign In
       </button>
-    </form>
+    </Form>
   );
 };

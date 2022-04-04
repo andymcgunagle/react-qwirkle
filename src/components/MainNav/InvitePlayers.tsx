@@ -23,12 +23,12 @@ export default function InvitePlayers() {
 
   return (
     <>
-      <button onClick={handleButtonClick}>
-        Invite players
+      <button onClick={handleButtonClick} className="with-icon">
+        <span className="material-icons-round">send</span>
+        <span>Invite players</span>
       </button>
       {showCurrentGameId &&
         <Dialog
-          className={`${copied && "copied"}`}
           handler={() => setShowCurrentGameId(false)}
           onClick={handleCardClick}
         >

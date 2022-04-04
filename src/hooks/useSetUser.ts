@@ -23,11 +23,8 @@ export function useSetUser() {
           dispatch(setUser(createUserObject(user, currentGameId)));
 
           if (currentGameId) {
-            const unsub = onSnapshot(currentGameRef(currentGameId), (doc) => {
-              if (doc.exists()) {
-                console.log('Listener firing');
-                dispatch(updateTiles(doc.data().tiles));
-              };
+            onSnapshot(currentGameRef(currentGameId), (doc) => {
+              if (doc.exists()) dispatch(updateTiles(doc.data().tiles));
             });
           }
         } catch (error) {
