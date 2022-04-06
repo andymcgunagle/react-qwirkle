@@ -98,3 +98,9 @@
 @keyframes spin {
   to { transform: rotate(1turn) }
 }
+
+@keyframes spin-and-bounce {
+  0% { transform: translateY(1.25rem) rotate(0deg) }
+  50% { transform: translateY(-0.75rem) rotate(180deg) }
+  100% { transform: translateY(1.25rem) rotate(360deg) }
+}

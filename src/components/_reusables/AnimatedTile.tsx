@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const Wrapper = styled.div`
   align-self: center;
-  animation: var(--animation-spin);
+  animation: var(--animation-spin-and-bounce);
   height: var(--space-10);
   margin-bottom: var(--space-0);
   width: var(--space-10);
@@ -22,7 +22,7 @@ export default function AnimatedTile() {
     const timer = setTimeout(() => {
       setTileShape(shapes[Math.floor(Math.random() * shapes.length)]);
       setTileColor(colors[Math.floor(Math.random() * colors.length)]);
-    }, 2000);
+    }, 2250);
     return () => clearTimeout(timer);
   });
 
